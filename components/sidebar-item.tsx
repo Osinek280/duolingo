@@ -15,9 +15,6 @@ export const SidebarItem = ({ label, src, href }: Props) => {
   const pathname = usePathname();
   const active = pathname === href;
 
-  console.log("pathname: ", pathname)
-  console.log("href: ", href)
-
   return (
     <Button
       variant={active ? "sidebarOutline" : "sidebar"}
