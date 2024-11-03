@@ -2,6 +2,8 @@ import { Header } from "@/components/header";
 import { Button } from "@/components/ui/button";
 import { Footer } from "@/components/footer";
 import Image from "next/image";
+import { ClerkLoaded, ClerkLoading, SignedIn, SignedOut, SignInButton, SignUpButton } from "@clerk/nextjs";
+import { Loader } from "lucide-react";
 
 export default function Home() {
   return (
@@ -29,10 +31,22 @@ export default function Home() {
 
           {/* Buttons */}
           <div className="flex flex-col sm:flex-row gap-4 mt-4">
-            <Button size="lg" variant="secondary">get started</Button>
-            {/* <button className="text-blue-500 underline text-lg font-semibold hover:text-blue-600 transition">
-              I Already Have an Account
-            </button> */}
+            <ClerkLoading>
+              <Loader className="h-5 w-5 text-muted-foreground animate-spin" />
+            </ClerkLoading>
+            <ClerkLoaded>
+              <SignedOut>
+                <SignInButton mode="modal">
+                  <Button size="lg" variant="secondary">get started</Button>
+                </SignInButton>
+                <SignUpButton mode="modal">
+                  <Button size="lg" variant="primaryOutline" className="w-full">I already have an account</Button>
+                </SignUpButton>
+              </SignedOut>
+              <SignedIn>
+                <Button size="lg" variant="secondary">Continue Learning</Button>
+              </SignedIn>
+            </ClerkLoaded>
           </div>
         </section>
       </main>
